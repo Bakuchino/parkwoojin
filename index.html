@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>박우진 | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Maru+Buri:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* 기본 스타일 초기화 및 시집 감성 테마 설정 */
+        :root {
+            --bg-color: #fcfbf7;      /* 은은한 미색 지면 느낌 */
+            --text-color: #1a1a1a;    /* 짙은 먹색 */
+            --point-color: #8b0000;   /* 타오르는 열정의 딥레드 */
+            --line-color: #e0ded9;    /* 은은한 구분선 */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Maru Buri', Georgia, serif;
+            line-height: 1.8;
+            letter-spacing: -0.01em;
+            padding: 0 20px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 100px auto;
+        }
+
+        /* 헤더: 시집 표지 감성 */
+        header {
+            text-align: center;
+            margin-bottom: 120px;
+            position: relative;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            margin-bottom: 30px;
+            color: var(--text-color);
+        }
+
+        .quote {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--point-color);
+            margin-bottom: 15px;
+            letter-spacing: 0.05em;
+        }
+
+        .sub-quote {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 300;
+        }
+
+        /* 섹션 공통 스타일 */
+        section {
+            margin-bottom: 90px;
+        }
+
+        h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: 30px;
+            color: var(--text-color);
+            border-left: 2px solid var(--point-color);
+            padding-left: 15px;
+        }
+
+        /* 프로필 & 취미 섹션 */
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        @media (max-width: 600px) {
+            .profile-grid { grid-template-columns: 1fr; gap: 30px; }
+        }
+
+        .profile-item p {
+            font-size: 0.95rem;
+            color: #444;
+            margin-bottom: 8px;
+        }
+
+        /* 타임라인 섹션 (학력) */
+        .timeline {
+            position: relative;
+            padding-left: 25px;
+            border-left: 1px solid var(--line-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 8px;
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background-color: var(--line-color);
+        }
+
+        .timeline-item.current::before {
+            background-color: var(--point-color);
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .timeline-desc {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        /* 능력치 (게이지바) 섹션 */
+        .skill-item {
+            margin-bottom: 20px;
+        }
+
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+        }
+
+        .skill-bar-bg {
+            width: 100%;
+            height: 2px;
+            background-color: var(--line-color);
+            position: relative;
+        }
+
+        .skill-bar-fill {
+            height: 100%;
+            background-color: var(--text-color);
+            position: absolute;
+            left: 0;
+            top: 0;
+            transition: width 1s ease;
+        }
+
+        /* 소속 동아리 섹션 */
+        .club-list {
+            list-style: none;
+        }
+
+        .club-list li {
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+        }
+
+        .club-list strong {
+            color: var(--point-color);
+            font-weight: 600;
+        }
+
+        /* 데일리 노래 추천 (방명록 스타일) */
+        .music-rec-box {
+            background-color: #f7f5ef;
+            padding: 30px;
+            border: 1px solid var(--line-color);
+        }
+
+        .music-input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .music-input-group input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #999;
+            padding: 8px 4px;
+            font-family: 'Maru Buri', serif;
+            font-size: 0.9rem;
+        }
+
+        .music-input-group input:focus {
+            outline: none;
+            border-bottom: 1px solid var(--point-color);
+        }
+
+        .music-btn {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            border: none;
+            padding: 0 20px;
+            font-family: 'Maru Buri', serif;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .music-btn:hover {
+            background-color: var(--point-color);
+        }
+
+        .rec-list {
+            list-style: none;
+            font-size: 0.9rem;
+            border-top: 1px dashed var(--line-color);
+            padding-top: 15px;
+        }
+
+        .rec-item {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #eae7e0;
+            display: flex;
+            justify-content: space-between;
+            color: #555;
+        }
+
+        /* 푸터 */
+        footer {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #999;
+            margin-top: 150px;
+            margin-bottom: 50px;
+            letter-spacing: 0.05em;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <header>
+            <div class="quote">“It’s better to burn out than fade away”</div>
+            <h1>박 우 진</h1>
+            <div class="sub-quote">차분하지만 내부에서 세차게 타오르는 열정으로.</div>
+        </header>
+
+        <hr style="border: 0; height: 1px; background: var(--line-color); margin-bottom: 90px;">
+
+        <section>
+            <div class="profile-grid">
+                <div class="profile-item">
+                    <h2>시선과 취향</h2>
+                    <p><strong>관심 분야:</strong> 이상한 음악, 특이한 영화, 외로운 그림과 글</p>
+                    <p><strong>취미:</strong> 기타 및 드럼 연주, 글 쓰기, 그림 그리기, 음악 감상</p>
+                </div>
+                <div class="profile-item">
+                    <h2>해보고 싶은 것</h2>
+                    <p>• 홍대에서 마음이 맞는 친구들과 뜨겁게 공연하기</p>
+                    <p>• 우리만의 색이 담긴 밴드 앨범 발매하기</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>발자취 (Timeline)</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-title">서울구남초등학교</div>
+                    <div class="timeline-desc">졸업</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-title">배재중학교</div>
+                    <div class="timeline-desc">졸업</div>
+                </div>
+                <div class="timeline-item current">
+                    <div class="timeline-title">한영외국어고등학교</div>
+                    <div class="timeline-desc">재학 중</div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>현재의 소속</h2>
+            <ul class="club-list">
+                <li>• 한영외고 오케스트라 <strong>HCO</strong></li>
+                <li>• 한영외고 밴드 <strong>O2</strong></li>
+                <li>• 상설 동아리 <strong>인문적 시선</strong></li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>표현의 깊이 (Skills)</h2>
+            
+            <div class="skill-item">
+                <div class="skill-info"><span>그림 (Drawing)</span><span>90%</span></div>
+                <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 90%;"></div></div>
+            </div>
+
+            <div class="skill-item">
+                <div class="skill-info"><span>드럼 (Drum)</span><span>85%</span></div>
+                <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 85%;"></div></div>
+            </div>
+
+            <div class="skill-item">
+                <div class="skill-info"><span>피아노 (Piano)</span><span>80%</span></div>
+                <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 80%;"></div></div>
+            </div>
+
+            <div class="skill-item">
+                <div class="skill-info"><span>일렉기타 (Electric Guitar)</span><span>70%</span></div>
+                <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 70%;"></div></div>
+            </div>
+
+            <div class="skill-item">
+                <div class="skill-info"><span>글 (Writing)</span><span>60%</span></div>
+                <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 60%;"></div></div>
+            </div>
+        </section>
+
+        <section>
+            <h2>데일리 노래 추천</h2>
+            <div class="music-rec-box">
+                <p style="font-size: 0.85rem; margin-bottom: 15px; color: #666;">오늘 우진이에게 들려주고 싶은 '이상하거나 외롭거나 특이한' 노래를 남겨주세요.</p>
+                <div class="music-input-group">
+                    <input type="text" id="musicInput" placeholder="아티스트 - 곡 제목을 입력하세요">
+                    <button class="music-btn" onclick="addMusic()">추천하기</button>
+                </div>
+                <ul class="rec-list" id="recList">
+                    <li class="rec-item"><span>Radiohead - Creep</span><span style="font-size:0.75rem; color:#999;">기본 추천곡</span></li>
+                    <li class="rec-item"><span>검정치마 - 섬 (Everything)</span><span style="font-size:0.75rem; color:#999;">기본 추천곡</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2026 Park Woojin. All rights reserved.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        function addMusic() {
+            const input = document.getElementById('musicInput');
+            const text = input.value.trim();
+            
+            if (text === '') {
+                alert('노래 제목을 입력해주세요.');
+                return;
+            }
+
+            const resList = document.getElementById('recList');
+            const li = document.createElement('li');
+            li.className = 'rec-item';
+            
+            // 현재 입력한 곡 추가
+            li.innerHTML = `<span>${text}</span><span style="font-size:0.75rem; color:var(--point-color);">방금 추가됨</span>`;
+            
+            // 리스트 최상단에 추가
+            resList.insertBefore(li, resList.firstChild);
+            
+            // 입력창 비우기
+            input.value = '';
+        }
+
+        // 엔터키 입력 지원
+        document.getElementById('musicInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                addMusic();
+            }
+        });
+    </script>
+</body>
+</html>
